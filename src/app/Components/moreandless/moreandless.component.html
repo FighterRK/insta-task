@@ -1,0 +1,16 @@
+ <div class="content">
+
+ 
+ <div *ngIf="newsFeed.length <= wordLimit">{{newsFeed}}</div>
+
+        <div *ngIf="newsFeed.length > wordLimit && !showMore">
+          {{newsFeed.substring(0,wordLimit)}}
+          <div (click)="showMore = true" style="color: rgb(153, 153, 153);">...more</div>
+        </div>
+
+        <div *ngIf="newsFeed.length > wordLimit && showMore">
+          {{newsFeed}}
+          <div (click)="showMore = false" style="color: rgb(153, 153, 153);">show less</div>
+        </div>
+
+    </div>
