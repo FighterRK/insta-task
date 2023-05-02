@@ -1,95 +1,77 @@
-<div class="container"   #lazyLoad >
-
+<div class="container">
   <div class="head-section">
-
     <div class="head-sub">
+      <div class="camera-icon">
+        <img src="../assets/images/camera.png" alt="Camera" />
+      </div>
 
-    <div class="camera-icon">
-      <img src="../assets/images/camera.png" alt="Camera" >
+      <div class="title">Instagram</div>
     </div>
-
-    <div class="title">
-      Instagram
-    </div>
-
-    </div>
-
 
     <div class="send-icon">
-      <img src="../assets/images/send.png" alt="Send">
+      <img src="../assets/images/send.png" alt="Send" />
       <div class="notf">10</div>
     </div>
-
   </div>
 
-
-  <div  *ngFor="let datas of apiNewsFeedData" class="card"  >
-   
- 
-    <div class="main-card-title" >
-
-      <div class="card-title">
-       
-        <div class="card-img">
-          <img src="{{datas?.urlToImage }}" alt="Profile Picture">
-  
+  <div #lazyLoad>
+    <div *ngFor="let datas of apiNewsFeedData" class="card">
+      <div class="main-card-title">
+        <div class="card-title">
+          <div class="card-img">
+            <img src="{{ datas?.urlToImage }}" alt="Profile Picture" />
+          </div>
+          <div class="card-name">
+            {{ datas?.author }}
+          </div>
         </div>
-        <div class="card-name">
-          {{datas?.author}}
+        <div class="more">
+          <img src="../assets/images/3-vertical-dots-icon.svg" alt="more" />
         </div>
-  
       </div>
-      <div class="more">
-        <img src="../assets/images/3-vertical-dots-icon.svg" alt="more">
 
+      <div class="title-main-img">
+        <img src="{{ datas?.urlToImage }}" alt="Uploaded Picture" />
+
+        <div class="popularity">
+          <div class="like">
+            <div class="love">
+              <img src="../assets/images/like.png" alt="like" />
+            </div>
+            <div class="cmt">
+              <img src="../assets/images/cmt.png" alt="comment" />
+            </div>
+            <div class="snt">
+              <img src="../assets/images/sent.png" alt="send" />
+            </div>
+          </div>
+          <div class="save-post">
+            <img src="../assets/images/bookmark.png" alt="save post" />
+          </div>
+        </div>
+
+        <div class="post-info">
+          <div class="liked-by">
+            <div class="liked-img">
+              <img src="{{ datas?.urlToImage }}" />
+              <img id="middle" src="{{ datas?.urlToImage }}" />
+             
+            </div>
+            <div class="like-details">
+              Liked by <b> {{ datas?.author }}</b> and <b>65,206 others</b>
+            </div>
+          </div>
+
+          <div class="feeds">
+            <app-moreandless
+              id="feed-data"
+              [newsFeed]="datas.description"
+              [wordLimit]="50"
+            ></app-moreandless>
+            <span class="feed-cmnt">View all 995 comments</span>
+          </div>
+        </div>
+      </div>
     </div>
-
-
-
   </div>
-
-  <div class="title-main-img">
-    <img src="{{datas?.urlToImage }}" alt="Uploaded Picture">
-
-    <div class="popularity">
-      <div class="like">
-        <div class="love">
-          <img src="../assets/images/like.png" alt="like" >
-        </div>
-        <div class="cmt">
-          <img src="../assets/images/cmt.png" alt="comment" >
-        </div>
-        <div class="snt">
-          <img src="../assets/images/sent.png" alt="send" >
-        </div>
-
-      </div>
-      <div class="save-post">
-        <img src="../assets/images/bookmark.png" alt="save post" >
-      </div>
-    </div>
-
-    <div class="post-info">
-      <div class="liked-by">
-        <div class="liked-img">
-          <img src="{{datas?.urlToImage}}" >
-          <img id="middle" src="{{datas?.urlToImage}}" >
-          <img src="{{datas?.urlToImage}}" >
-        </div>
-        <div class="like-details">Liked by <b> {{datas?.author}}</b> and <b>65,206 others</b> </div>
-      </div>
-
-      <div class="feeds">
-
-      
-
-      <app-moreandless id="feed-data" [newsFeed]="datas.description "[wordLimit]="50"></app-moreandless>
-      <span class="feed-cmnt">View all 995 comments</span>
-
-      </div>
-    </div>
-    
-  </div>
-
-
 </div>

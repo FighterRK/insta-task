@@ -1,4 +1,4 @@
-import { Component , OnInit , ViewChild ,ElementRef , AfterViewInit} from '@angular/core';
+import { Component , OnInit , ViewChild ,ElementRef , AfterViewInit , Renderer2} from '@angular/core';
 import { ApiServiceService } from './Services/api-service.service';
 
 interface NewsFeedItem {
@@ -7,6 +7,10 @@ interface NewsFeedItem {
   urlToImage: string;
   author:string
   // other properties
+}
+
+interface NewsFeedRes {
+  articles : NewsFeedItem[]
 }
 
 
@@ -28,6 +32,7 @@ export class AppComponent implements OnInit , AfterViewInit {
   public apiNewsFeedData: NewsFeedItem[] = [];
   
  @ViewChild('lazyLoad') lazyLoad!: ElementRef;
+
  
  public currentIndex = 0;
 
@@ -59,17 +64,36 @@ export class AppComponent implements OnInit , AfterViewInit {
     
   }
 
-  loadMoreFeeds(): void {
+  loadMoreFeeds(){
     
-    this.newsFeedService.getFeed().subscribe((res: any) => {
-      console.log('data is showing');
-      
+    this.newsFeedService.getFeed().subscribe((res:NewsFeedRes) => {
 
+      console.log('data is showing');
+
+      if (res!==null) {
+        
       const newData = res.articles.slice(this.currentIndex, this.currentIndex + 30);
       this.apiNewsFeedData = [...this.apiNewsFeedData, ...newData];
       this.currentIndex += 30;
+        
+      } else {
+
+        console.log('data is null');
+        
+      }
+
+      
+
+
+      
+
       
     });
   }
+
+  
+
+ 
+  
 
 }
